@@ -1,0 +1,104 @@
+@model PageViewModel<ArticlePage>
+
+@{ Layout = "~/Views/Shared/Layouts/_LeftNavigation.cshtml"; }
+
+@* Refresh these properties modified values  *@
+@Html.FullRefreshPropertiesMetaData([
+    nameof(Model.CurrentPage.Ratings), 
+    nameof(Model.CurrentPage.Animals), 
+    nameof(Model.CurrentPage.City), 
+    nameof(Model.CurrentPage.CityQuery),
+    nameof(Model.CurrentPage.WeatherIsSunny),
+    nameof(Model.CurrentPage.WeatherIsCloudy),
+    nameof(Model.CurrentPage.WeatherIsRainy),
+    nameof(Model.CurrentPage.ShowAdvancedOptions),
+    nameof(Model.CurrentPage.IWantVegetarianOption),
+    nameof(Model.CurrentPage.IWantFood),
+    nameof(Model.CurrentPage.IWantBeverage),
+    nameof(Model.CurrentPage.SpecialOrderSummary),
+    nameof(Model.CurrentPage.DiscountCode)
+])
+
+<div class="content">
+    <h1 epi-property="@Model.CurrentPage.PageImage">@Model.CurrentPage.PageName</h1>
+
+    <p epi-property="@Model.CurrentPage.Ratings">What rating does this article get from you?</p>
+
+    <div>
+        @if (!string.IsNullOrEmpty(Model.CurrentPage.Ratings)) 
+        {
+            <i>You rated this article: @Model.CurrentPage.Ratings</i>
+        }
+    </div>
+
+    <div>
+        <p epi-property="@Model.CurrentPage.Animals">Which animals scares you the most?</p>
+        @if (!string.IsNullOrEmpty(Model.CurrentPage.Animals)) 
+        {
+            <i>These animals scare you the most: @Model.CurrentPage.Animals</i>
+        }
+    </div>
+
+    <div>
+        <p epi-property="@Model.CurrentPage.City">Which city do you live in?</p>
+        @if (!string.IsNullOrEmpty(Model.CurrentPage.City)) 
+        {
+            <i>You selected: @Model.CurrentPage.City</i>
+        }
+    </div>
+
+    <div>
+        <p epi-property="@Model.CurrentPage.CityQuery">Which city do you live in? You may search by city name</p>
+        @if (!string.IsNullOrEmpty(Model.CurrentPage.CityQuery)) 
+        {
+            <i>You selected: @Model.CurrentPage.CityQuery</i>
+        }
+    </div>
+
+    <div>
+        <span epi-property="@Model.CurrentPage.WeatherIsSunny">Is the weather sunny today?</span>
+        <i>You selected: @Model.CurrentPage.WeatherIsSunny</i>
+    </div>
+
+    <div>
+        <span epi-property="@Model.CurrentPage.WeatherIsCloudy">Is the weather cloudy today?</span>
+        <i>You selected: @Model.CurrentPage.WeatherIsCloudy</i>
+    </div>
+
+    <div>
+        <span epi-property="@Model.CurrentPage.WeatherIsRainy">Is the weather rainy today?</span>
+        <i>You selected: @Model.CurrentPage.WeatherIsRainy</i>
+    </div>
+
+    <div>
+        <span epi-property="@Model.CurrentPage.ShowAdvancedOptions">Display more options?</span>
+        <i>You selected: @Model.CurrentPage.ShowAdvancedOptions</i>
+    </div>
+
+    @if (Model.CurrentPage.ShowAdvancedOptions) 
+    {
+        <div>
+            <p epi-property="@Model.CurrentPage.SpecialOrderSummary">Do you have any special concerns we should be aware about?</p>
+            @if (!string.IsNullOrEmpty(Model.CurrentPage.SpecialOrderSummary)) 
+            {
+                <i>You said: @Model.CurrentPage.SpecialOrderSummary</i>
+            }
+        </div>
+
+        <div>
+            <p epi-property="@Model.CurrentPage.DiscountCode">Do you have a discount code?</p>
+            @if (!string.IsNullOrEmpty(Model.CurrentPage.DiscountCode)) 
+            {
+                <i>Your discount code: @Model.CurrentPage.DiscountCode</i>
+            }
+        </div>
+    }
+
+    <p class="lead" epi-property="@Model.CurrentPage.MetaDescription">@Model.CurrentPage.MetaDescription</p>
+
+    <div class="clearfix">
+        <div epi-property="@Model.CurrentPage.MainBody" />
+    </div>
+</div>
+
+<div epi-property="@Model.CurrentPage.MainContentArea" class="row" />
